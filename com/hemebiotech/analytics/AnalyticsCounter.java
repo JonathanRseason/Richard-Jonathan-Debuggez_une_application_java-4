@@ -3,12 +3,39 @@ package com.hemebiotech.analytics;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.util.TreeMap;
+import java.util.*;
 
 public class AnalyticsCounter {
 	private static int headacheCount = 0;
 	private static int rashCount = 0;
 	private static int pupilCount = 0;
-	
+
+	private ISymptomReader reader;
+	private ISymptomWriter writer;
+    private Map<String, Integer> mapsymptoms;
+
+	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer){
+		this.reader = reader;
+		this.writer = writer;
+	}
+
+	public List<String> getSymptoms() {
+		return this.reader.getSymptoms();
+	}
+
+	public Map<String, Integer> countSymptoms(List<String> symptoms) {
+        return mapsymptoms;
+	}
+
+	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
+        return symptoms;
+	}
+
+	public void writeSymptoms(Map<String, Integer> symptoms) {
+		this.writer.writeSymptoms(symptoms);
+	}
+
 	public static void main(String args[]) throws Exception {
 		// first get input
 		BufferedReader reader = new BufferedReader (new FileReader("symptoms.txt"));
