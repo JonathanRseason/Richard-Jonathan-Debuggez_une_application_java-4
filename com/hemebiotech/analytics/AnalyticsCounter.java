@@ -13,7 +13,8 @@ public class AnalyticsCounter {
 
 	private ISymptomReader reader;
 	private ISymptomWriter writer;
-    private Map<String, Integer> mapsymptoms;
+	//private Map<String, Integer> mapsymptoms = new HashMap<String, Integer>();
+	//private Map<String, Integer> sortmap = new TreeMap<String, Integer>();
 
 	public AnalyticsCounter(ISymptomReader reader, ISymptomWriter writer){
 		this.reader = reader;
@@ -25,11 +26,20 @@ public class AnalyticsCounter {
 	}
 
 	public Map<String, Integer> countSymptoms(List<String> symptoms) {
-        return mapsymptoms;
+		Map<String, Integer> mapsymptoms = new HashMap<String, Integer>();
+		for (String key : symptoms) {
+			if (mapsymptoms.containsKey(key)) {
+				mapsymptoms.put(key, mapsymptoms.get(key) + 1);
+			}else{
+			    mapsymptoms.put(key, 1);
+            }
+		}
+		return mapsymptoms;
 	}
 
 	public Map<String, Integer> sortSymptoms(Map<String, Integer> symptoms) {
-        return symptoms;
+		Map<String, Integer> sortmap = new TreeMap<String, Integer>(symptoms);
+        return sortmap;
 	}
 
 	public void writeSymptoms(Map<String, Integer> symptoms) {
