@@ -6,21 +6,19 @@ import java.util.Iterator;
 import java.util.Map;
 
 public class WriteSymptomDataToFile implements ISymptomWriter {
-    
-    public void writeSymptoms(Map<String, Integer> symptoms) {
-        try {
-            FileWriter writer = new FileWriter ("result.out");
-            for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
-                writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
-            }
-            /*writer.write("headache: " + headacheCount + "\n");
-            writer.write("rash: " + rashCount + "\n");
-            writer.write("dialated pupils: " + pupilCount + "\n");*/
-            writer.close();
-            } catch (IOException ioe){
-
-            }
-
+  /**
+   * Write map with name of the symptoms, number of occurence in a file.
+   * @param symptoms map of sorted symptoms
+   */
+  public void writeSymptoms(Map<String, Integer> symptoms) {
+    try {
+      FileWriter writer = new FileWriter("result.out");
+      for (Map.Entry<String, Integer> entry : symptoms.entrySet()) {
+        writer.write(entry.getKey() + " : " + entry.getValue() + "\n");
+      }
+      writer.close();
+    } catch (IOException ioe) {
+      println("Oups !");
     }
-
+  }
 }

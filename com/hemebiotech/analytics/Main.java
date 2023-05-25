@@ -4,21 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 public class Main {
+  /**
+   * Main of our program, instanciate class and applied logic iteration.
+   */
+  public static void main(String[] args) throws Exception {
 
-    public static void main(String args[]) throws Exception {
+    ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
+    ISymptomWriter writer = new WriteSymptomDataToFile();
+    AnalyticsCounter acounter = new AnalyticsCounter(reader, writer);
 
-        ISymptomReader reader = new ReadSymptomDataFromFile("symptoms.txt");
-        ISymptomWriter writer = new WriteSymptomDataToFile();
-        //ReadSymptomDataFromFile reader = new ReadSymptomDataFromFile("./symptoms.txt");
-        //WriteSymptomDataToFile writer = new WriteSymptomDataToFile();
-        AnalyticsCounter acounter = new AnalyticsCounter(reader, writer);
+    List<String> listSymptoms = acounter.getSymptoms();
 
-        List<String> listsymptoms = acounter.getSymptoms();
+    Map<String, Integer> mapSymptoms = acounter.countSymptoms(listSymptoms);
 
-        Map<String, Integer> mapsymptoms = acounter.countSymptoms(listsymptoms);
+    mapSymptoms = acounter.sortSymptoms(mapSymptoms);
 
-        mapsymptoms = acounter.sortSymptoms(mapsymptoms);
-
-        acounter.writeSymptoms(mapsymptoms);
-    }
+    acounter.writeSymptoms(mapSymptoms);
+  }
 }
